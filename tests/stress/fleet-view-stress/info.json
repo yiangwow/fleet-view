@@ -1,0 +1,9 @@
+{
+  "name": "fleet-view-stress",
+  "version": "0.1.0",
+  "title": "Fleet View stress ships (test only)",
+  "author": "holyskib",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.1", "space-age >= 2.1", "? fleet-view"],
+  "description": "Test only, not shipped. /fv-stress [n] makes n random big platforms parked at your platform's planet, /fv-hop jumps your platform away and back, /fv-stress-clear deletes the stress platforms."
+}

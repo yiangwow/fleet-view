@@ -1,0 +1,1 @@
+{"name":"fv-micro","version":"0.1.0","title":"Fleet View micro benchmark","author":"holyskib","factorio_version":"2.1","dependencies":["base >= 2.1","space-age >= 2.1"],"description":"Cost of moving many attached render objects. Not shipped."}

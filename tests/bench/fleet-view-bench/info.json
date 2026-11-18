@@ -1,0 +1,9 @@
+{
+  "name": "fleet-view-bench",
+  "version": "0.1.0",
+  "title": "Fleet View benchmark driver",
+  "author": "holyskib",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.1", "space-age >= 2.1", "? fleet-view >= 0.1.0"],
+  "description": "Benchmark-only: moves the viewer every tick. Not shipped."
+}

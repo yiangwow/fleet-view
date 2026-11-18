@@ -1,0 +1,131 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.5.0
+Date: 2026-11-16
+  Optimizations:
+    - Ship floors are drawn in much bigger pieces, about half as many sprites per ship. Floating ships, arrivals and departures cost much less UPS with big fleets (test with 10 big ships: Smooth float about 3 times cheaper, far fewer slow ticks while ships arrive or leave).
+    - A floating ship is no longer moved when the move would not change anything on screen.
+  Changes:
+    - Float smoothness is now Smooth by default, for everyone: the setting starts again at Smooth after this update. If you had picked Balanced or Light, pick it again in Mod settings > Per player.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.11
+Date: 2026-11-16
+  Bugfixes:
+    - On short routes such as moons (Muluna, Cerys), background ships now leave and arrive together with the planet. The game moves the planet by how much of the trip is done, so near a moon it leaves much sooner; before, the ships stayed behind in empty space or were already parked before the moon showed. Normal routes are unchanged.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.10
+Date: 2026-11-15
+  Bugfixes:
+    - Background ships now sit behind the parts that hang below the edge of your own platform, instead of being drawn over them.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.9
+Date: 2026-11-14
+  Features:
+    - New setting "Float smoothness" (Smooth / Balanced / Light), next to "Floating ships". Smooth moves parked ships every tick (the smoothest, but costs the most UPS with many big ships), Balanced is the 0.4.8 behaviour, Light moves them less often (cheapest). It applies at once, no redraw.
+  Changes:
+    - Ships now sit close to very wide or cross-shaped platforms: a ship moves in from the edge of the platform's bounding box into any empty corner it fits in, instead of always floating at the far edge. Ring platforms never get ships in their hole.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.8
+Date: 2026-11-14
+  Bugfixes:
+    - Fixed a crash on startup with HD texture mods that split a belt sheet over several files (Factorio HD Age: Space Age - Logistics, turbo belts).
+    - "Zoom into ships" now waits until your zoom stops changing before it switches you. With a smooth zoom mod (Further Zoom) you could land on the new platform and get zoomed straight back in.
+    - Underground belt exits on background ships face the right way (they were turned around).
+    - Pipe-to-ground uses its own picture for each direction, instead of the north one turned.
+  Optimizations:
+    - Floating ships cost far less: a parked ship is only moved once it has drifted about a pixel, instead of every tick. Moving a ship costs time for every sprite on it, so this was most of the mod's cost while ships are parked.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.7
+Date: 2026-11-12
+  Changes:
+    - "Zoom into ships" now works in multiplayer too (tested on a server: no desync).
+    - "Zoom into ships" is now off by default. Turn it on in Settings > Mod settings > Per player.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.6
+Date: 2026-11-12
+  Features:
+    - Camera parallax: background ships now drift slightly with your camera (walking, or panning in remote view), farther ships more than nearer ones, so they read as far away instead of as small ships on the same plane. Optional: per-player setting "Camera parallax" (off / subtle / medium / strong), off by default (smooth while walking; a click-drag in remote view is only seen once you let go, so ships catch up after it).
+    - Seamless transfer: zoom in on a parked background ship until it is about as big as a real platform and you continue in remote view of that platform, at the same spot with the picture barely changing. Single player only for now. New per-player setting "Zoom into ships" (on by default) to turn it off.
+    - Curved belts are drawn curved, and pipes join their neighbours (straight, corners, T pieces, crosses, ends) instead of all being straight pieces.
+    - Underground belts show their entrance / exit hood and the half belt, facing the right way.
+    - Buildings on background ships now cast the same soft shadows as in the real platform (to the right of the building, under it). One extra sprite per entity that has a shadow (about 10% more sprites per ship).
+    - Platform edges: background ships get the real underside art hanging below the deck and along the sides (straight edges, inner and outer corners, narrow gaps and strips), one piece per empty tile next to the deck.
+    - Inserters show their arm (resting over the pickup side) when "Building detail" is on. One more object per inserter.
+    - Beacons show the real module tier (empty, tier 1, 2 or 3) in each slot (beacons with up to two slots).
+    - Powered lamps that are lit glow on the background ships (soft additive glow in the lamp's colour, at most 12 per ship).
+  Bugfixes:
+    - Inserters (and other multi-direction sprite sheets, like storage tanks) face the right way instead of always north.
+    - Beacons show their top and module slots instead of a dark spot.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.5
+Date: 2026-11-05
+  Features:
+    - Cargo bays and the hub are now joined by the same connection art as in the real platform (walls, corners, bridges between touching bays), so a group of bays reads as one block instead of separate boxes with floor between them.
+    - The hub is drawn with its hatches closed (dome) and cargo bays with their yellow lid, like the real ones.
+  Bugfixes:
+    - Thin dark lines across the floor of background ships (they came and went as the ship floated) are gone. The floor pieces now overlap by a hair, so no gap can open between them.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.4
+Date: 2026-11-05
+  Bugfixes:
+    - Entities that look different per direction now keep their facing on background ships. Fusion generators used to be drawn the same way (east) whatever their rotation; they now face north, east, south or west like the real ones.
+    - Cargo bays are drawn with their space art (the one used on platforms) instead of the planet art.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.3
+Date: 2026-11-04
+  Bugfixes:
+    - Fixed the floor of background ships vanishing over the planet when using Visible Planets in Space: Fleet View no longer draws on the planet's render layer.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.2
+Date: 2026-10-31
+  Optimizations:
+    - Much less lag with many big ships arriving or leaving: ships under way share a per-tick budget of sprite updates instead of rewriting every sprite every tick, and only what changed is written.
+    - Reading a big ship's layout the first time is several times faster.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.1
+Date: 2026-10-25
+  Bugfixes:
+    - Fixed a crash at game start with mods whose graphics set both size and width/height to different values (for example Carna): Fleet View now reads size first, like the game does.
+  Changes:
+    - When your own platform leaves, the parked ships now fall behind (down the screen) like the planet does, and when it arrives they come in from ahead. Other ships leaving or arriving still fly ahead / come up from behind.
+    - Travelling ships shrink less (to about half size instead of a third) and no longer fade out on the way: they fly off the edge of the screen, like the planet. Bigger (nearer) ships move faster than smaller (farther) ones, so a fleet no longer moves in lockstep.
+    - Ships now leave at the pace of the planet in the background, set by the real speed of the platform that moves: between 5 and 8 seconds instead of always 3. When another ship arrives it takes a calm 10 seconds. When your own platform arrives, the ships parked there come in during your approach, together with the planet, and are in place the moment you stop.
+    - Parked ships now float gently around their spot, each on its own slow loop, so the fleet looks alive. Turn off "Floating ships" in the per-player mod settings if the movement looks choppy.
+---------------------------------------------------------------------------------------------------
+Version: 0.4.0
+Date: 2026-10-25
+  Changes:
+    - Ships now always travel forward, up the screen, the way a space platform flies: a leaving ship flies on ahead and fades out, an arriving one comes up from behind and fades in, instead of sliding sideways away from your deck.
+    - Arrivals slow down into their spot and departures speed up.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.1
+Date: 2026-10-24
+  Info:
+    - Added a mod portal thumbnail.
+---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2026-10-23
+  Features:
+    - Ships now get a random spot around your deck (any side, 3-12 tiles outside the deck's bounding box, never overlapping each other) and a random size (85%-115%), instead of a neat row above it.
+    - The spot is rolled once when a ship becomes visible, is shared by every player on the platform and survives saving; a ship that leaves and comes back gets a new spot. Ships leave and arrive along the line away from your deck.
+    - Randomness uses a saved game random generator (multiplayer safe).
+---------------------------------------------------------------------------------------------------
+Version: 0.2.0
+Date: 2026-10-23
+  Features:
+    - Ships now stay fixed in space above your deck (just past its top edge, spread across its width, scale 0.16) instead of following the camera; removed the depth setting.
+    - Every player on a platform sees the same layout.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2026-10-23
+  Bugfixes:
+    - Space platform hub and cargo bays are drawn complete (all render-layer groups of their graphics, not only the first).
+    - Floor tiles no longer paint over buildings: tiles, hub/cargo bay and other buildings are on separate render layers (fixes missing hub, furnaces, solar panels and more on distant ships).
+    - Belts, underground belts, splitters, pipes and walls use their real graphics (rotated per direction) instead of flat yellow bars.
+    - Floor drawn at true texture scale (2x2 and 1x1 platform tile pieces) instead of one stretched tile per merged rectangle.
+    - Running lights are small soft round dots (max 8 per ship) instead of large flat squares.
+  Features:
+    - Boarding a platform no longer gathers that platform's own model (one fewer hitch per boarding).
+    - Anchors are indestructible; if one is destroyed by another mod the ship is dropped cleanly instead of erroring.
+    - MIT LICENSE shipped; the test remote interface is only registered when a test helper mod is loaded.
+    - Other platforms drawn screen-relative (upper arc around you, scale 0.2, follow 0.85); with Depth effect off they stay fixed on screen.
+    - Mod skeleton and player settings (depth effect, building detail).

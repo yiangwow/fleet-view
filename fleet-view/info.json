@@ -1,0 +1,10 @@
+{
+  "name": "fleet-view",
+  "version": "0.5.0",
+  "title": "Fleet View",
+  "author": "holyskib",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.1", "space-age >= 2.1"],
+  "description": "Shows your other space platforms in the background of the platform you are on.",
+  "license": "MIT"
+}
